@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { HTTP_ENDPOINT_PREFIX } from "../../Constants";
 
-const LoginPage = () => {
+const LoginPage = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,7 +15,9 @@ const LoginPage = () => {
         password: password,
       })
       .then((response) => {
-        console.log(response);
+        const isLoggedIn = response?.data?.isVerified || false;
+        setIsLoggedIn(isLoggedIn);
+        window.sessionStorage.setItem("isLoggedIn", isLoggedIn);
       });
     event.preventDefault();
   };
