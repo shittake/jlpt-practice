@@ -9,7 +9,7 @@ function App() {
   useEffect(() => {
     setIsLoggedIn(window.sessionStorage.getItem("isLoggedIn") === "true");
   }, []);
-  console.log(isLoggedIn);
+
   return (
     <div className="App">
       {!isLoggedIn ? (
