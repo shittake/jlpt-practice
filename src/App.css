@@ -46,3 +46,43 @@
   height: 50px;
   border-width: 2px;
 }
+
+.question-card {
+  width: 80%;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.options-button {
+  width: 90%;
+  height: 100px;
+  background-color: transparent;
+  color:  #0d6efd;
+}
+
+.options-button:hover {
+  background-color: transparent;
+  color:  #0d6efd;
+}
+
+.options-button.selected {
+  background-color: #FAB0FF; 
+  border-color: #FAB0FF;
+}
+
+.question-header-container {
+  display: flex;
+  justify-content: space-between; 
+}
+
+.question-submit-button {
+  background-color: #FAB0FF;
+  border: #FAB0FF;
+  color: black;
+  font-weight: bold;
+}
+
+.question-submit-button:hover {
+  background-color:  #FAB0FF;
+}
