@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    setIsLoggedIn(window.sessionStorage.getItem("isLoggedIn"));
+    setIsLoggedIn(window.sessionStorage.getItem("isLoggedIn") === "true");
   }, []);
   console.log(isLoggedIn);
   return (

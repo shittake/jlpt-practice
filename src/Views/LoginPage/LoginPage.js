@@ -1,14 +1,37 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Card,
+  Spinner,
+} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { HTTP_ENDPOINT_PREFIX } from "../../Constants";
 
+const bcrypt = require("bcryptjs");
 const LoginPage = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleHashPassword = async () => {
+    const saltRounds = 5;
+    try {
+      const hash = await bcrypt.hash(password, saltRounds);
+      return hash;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    setIsLoading(true);
+    event.preventDefault();
     axios
       .post(`${HTTP_ENDPOINT_PREFIX}/verify`, {
         email: email,
@@ -17,9 +40,11 @@ const LoginPage = ({ setIsLoggedIn }) => {
       .then((response) => {
         const isLoggedIn = response?.data?.isVerified || false;
         setIsLoggedIn(isLoggedIn);
+        if (!isLoggedIn)
+          setErrorMessage("The email and password combination is incorrect");
         window.sessionStorage.setItem("isLoggedIn", isLoggedIn);
+        setIsLoading(false);
       });
-    event.preventDefault();
   };
 
   return (
@@ -45,7 +70,7 @@ const LoginPage = ({ setIsLoggedIn }) => {
                 </Form.Group>
 
                 <Form.Group
-                  style={{ marginTop: "10%" }}
+                  style={{ marginTop: "10%", marginBottom: "10%" }}
                   controlId="formPassword"
                 >
                   <Form.Control
@@ -56,13 +81,17 @@ const LoginPage = ({ setIsLoggedIn }) => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </Form.Group>
-
-                <Button
-                  style={{ marginTop: "10%" }}
-                  variant="primary"
-                  type="submit"
-                >
-                  Login
+                {errorMessage && (
+                  <p style={{ color: "red", marginBottom: "10%" }}>
+                    {errorMessage}
+                  </p>
+                )}
+                <Button type="submit" disabled={isLoading} variant="primary">
+                  {isLoading ? (
+                    <Spinner animation="border" size="sm" />
+                  ) : (
+                    "Login"
+                  )}
                 </Button>
               </Form>
             </Card.Body>
