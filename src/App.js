@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { LoginPage } from "./Views/LoginPage";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { EntryPage } from "./Views/EntryPage";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    setIsLoggedIn(window.sessionStorage.getItem("isLoggedIn") === "true");
+  }, []);
+  console.log(isLoggedIn);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {!isLoggedIn ? (
+        <LoginPage setIsLoggedIn={setIsLoggedIn} />
+      ) : (
+        <EntryPage />
+      )}
     </div>
   );
 }
