@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  background-color: rgb(254, 236, 226);
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -35,4 +40,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.form-control {
+  height: 50px;
+  border-width: 2px;
 }
