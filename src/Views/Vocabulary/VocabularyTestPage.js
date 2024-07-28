@@ -288,7 +288,7 @@ const VocabularyTestPage = ({ setNumber = 1 }) => {
               {setNumber + 1}!
             </p>
             <div>
-              Here is a summary of all the sample sentences used in this Set:
+              Here is a summary of all the sample sentences used in this set:
               <hr />
               {questions.map((question, index) => {
                 return (
