@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { HTTP_ENDPOINT_PREFIX } from "../../Constants";
+import { HTTP_ENDPOINT_PREFIX, POINTS } from "../../Constants";
 import { Card, Button, Row, Col, ProgressBar } from "react-bootstrap";
 import { shuffleArray, underlineSegment } from "../../Utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -282,7 +282,7 @@ const VocabularyTestPage = ({ setNumber = 1 }) => {
                   fontSize: "16px",
                 }}
               >
-                10 XP
+                {`${POINTS.vocab_set} XP`}
               </span>{" "}
               for your efforts and have unlocked the next set - Set{" "}
               {setNumber + 1}!
