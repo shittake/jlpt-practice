@@ -4,3 +4,7 @@ export const HTTP_ENDPOINT_PREFIX =
 export const POINTS = {
   vocab_set: 10,
 };
+
+export const SCORE = {
+  default: 12,
+};
