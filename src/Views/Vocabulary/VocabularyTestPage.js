@@ -1,10 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { HTTP_ENDPOINT_PREFIX, POINTS } from "../../Constants";
+import { HTTP_ENDPOINT_PREFIX, POINTS, SCORE } from "../../Constants";
 import { Card, Button, Row, Col, ProgressBar } from "react-bootstrap";
 import { shuffleArray, underlineSegment } from "../../Utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes, faTrophy } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faSadCry,
+  faTimes,
+  faTrophy,
+} from "@fortawesome/free-solid-svg-icons";
 
 const VocabularyTestPage = ({ setNumber = 1 }) => {
   const [vocabularyIdToTermInfoMapping, setVocabularyIdToTermInfoMapping] =
@@ -253,40 +258,49 @@ const VocabularyTestPage = ({ setNumber = 1 }) => {
         ) : (
           <>
             <FontAwesomeIcon
-              icon={faTrophy}
+              icon={correctAnswersCount >= SCORE.default ? faTrophy : faSadCry}
               style={{
                 marginTop: "16px",
                 marginBottom: "16px",
                 size: "100px",
-                color: "gold",
+                color: correctAnswersCount >= SCORE.default ? "gold" : "red",
                 fontSize: "64px",
               }}
             />
             <div
               style={{
-                color: "#FFA833",
+                color: correctAnswersCount >= SCORE.default ? "#FFA833" : "red",
                 fontWeight: "bold",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
               }}
             >
-              {`You got ${correctAnswersCount} correct answers, which is higher than the target of 12!`}
+              {`You got ${correctAnswersCount} correct answers, which is ${
+                correctAnswersCount >= SCORE.default ? "higher" : "lower"
+              } than the target of ${SCORE.default}!`}
             </div>
-            <p>
-              You have earned{" "}
-              <span
-                style={{
-                  color: "green",
-                  fontWeight: "bold",
-                  fontSize: "16px",
-                }}
-              >
-                {`${POINTS.vocab_set} XP`}
-              </span>{" "}
-              for your efforts and have unlocked the next set - Set{" "}
-              {setNumber + 1}!
-            </p>
+            {correctAnswersCount >= SCORE.default ? (
+              <p>
+                You have earned{" "}
+                <span
+                  style={{
+                    color: "green",
+                    fontWeight: "bold",
+                    fontSize: "16px",
+                  }}
+                >
+                  {`${POINTS.vocab_set} XP`}
+                </span>{" "}
+                for your efforts and have unlocked the next set - Set{" "}
+                {setNumber + 1}!
+              </p>
+            ) : (
+              <p>
+                Review the new vocabulary terms below and try again when you are
+                ready!
+              </p>
+            )}
             <div>
               Here is a summary of all the sample sentences used in this set:
               <hr />
