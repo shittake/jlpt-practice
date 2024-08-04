@@ -86,3 +86,56 @@
 .question-submit-button:hover {
   background-color:  #FAB0FF;
 }
+
+.custom-tabs .nav-tabs {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.custom-tabs .nav-link {
+  color: #007bff;
+  background-color: #ffffba;
+  font-weight: bold;
+  border: 2px solid #68c4af;
+}
+
+.custom-tabs .nav-link:hover {
+  color: #0056b3;
+  background-color: #e9ecef;
+}
+
+.custom-tabs .nav-link.active {
+  color: white;
+  background-color: #68c4af ;
+  border-color: #007bff;
+}
+
+.custom-tabs .nav-link.inactive {
+  color: white;
+  background-color: #68c4af ;
+  border-color: #007bff;
+}
+
+.roadmap {
+  position: relative;
+}
+
+.roadmap-level {
+  position: relative;
+  flex: 1;
+}
+
+.level-icon {
+  color: #d3d3d3; /* Default color for incomplete levels */
+  z-index: 1;
+}
+
+.level-icon.completed {
+  color: #28a745; /* Green color for completed levels */
+}
+
+.level-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
